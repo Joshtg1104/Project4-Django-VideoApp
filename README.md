@@ -1,2 +1,2 @@
 # Project4-Django-VideoApp
-Video App Project
+Video App Passion Project
