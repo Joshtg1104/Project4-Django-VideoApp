@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<navbar>
+<section><a href="{% url 'uploadVideo' %}">Vommunicate</a></section>
+</navbar>
+
+{% if allVideos %}
+<ul>
+    {% for eachVideo in allVideos %}
+        <video width='300' controls>
+            <source src='{{ MEDIA_URL }}{{ videofile }}' type='video'>
+        </video>
+        <br>
+    {% endfor %}
+</ul>
+{% else %}
+<h3>No Vommies Available</h3>
+{% endif %}
+
+</body>
+</html>
