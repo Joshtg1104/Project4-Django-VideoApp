@@ -28,11 +28,11 @@ def uploadvideo(request):
     lastvideo = Video.objects.last()
     print(lastvideo)
 
-    videofile = lastvideo.videofile
-    print(videofile)
+    vids = lastvideo.videofile
+    print(vids)
 
     context = {
-        'videofile': videofile,
+        'vids': vids,
         'form': form
     }
 
