@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-from .forms import VideoForm
-from .models import Video
+from .forms import VideoForm, AccountForm
+from .models import Video, AccountModel
 
 
 # Create your views here.
@@ -26,10 +26,8 @@ def uploadvideo(request):
             return redirect('index')
 
     lastvideo = Video.objects.last()
-    print(lastvideo)
 
     vids = lastvideo.videofile
-    print(vids)
 
     context = {
         'vids': vids,
