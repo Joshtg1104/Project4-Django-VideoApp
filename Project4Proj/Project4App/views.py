@@ -7,6 +7,10 @@ from .models import Video, AccountModel
 # Create your views here.
 
 
+def base(request):
+    return render(request, 'Project4App/base.html')
+
+
 def index(request):
     allVideos = Video.objects.all()
     context = {
@@ -22,7 +26,7 @@ def createaccount(request):
         if newaccountform.is_valid():
             newaccountform.save()
 
-            User.objects.create_user(request.POST["username"], request.POST["password"])
+            User.objects.create_user(request.POST["username"], "", request.POST["password"])
             return redirect('index')
     context = {
         'errors': newaccountform.errors,
@@ -33,21 +37,25 @@ def createaccount(request):
 
 def uploadvideo(request):
 
-    form = VideoForm(request.POST or None, request.FILES or None)
+    vidform = VideoForm(request.POST)
+
+    if request.user.is_authenticated:
+        user = AccountModel.objects.get(username=request.user)
 
     if request.method == "POST":
-        if form.is_valid():
-            form.save()
+        if vidform.is_valid():
+            Video.objects.create(name=request.POST["name"], videofile=request.FILES["videofile"], videoForeignKey=user)
+            vidform.save()
 
             return redirect('index')
 
-    lastvideo = Video.objects.last()
-
-    vids = lastvideo.videofile
+    # lastvideo = Video.objects.last()
+    #
+    # vids = lastvideo.videofile
 
     context = {
-        'vids': vids,
-        'form': form
+        'vidform': vidform,
+        'errors': vidform.errors
     }
 
     return render(request, 'Project4App/uploadVideo.html', context)

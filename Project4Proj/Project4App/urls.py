@@ -5,6 +5,7 @@ from django.views.static import serve
 from . import views
 
 urlpatterns = [
+    path('base/', views.base, name='base'),
     path('', views.index, name='index'),
     path('createAccount/', views.createaccount, name='createAccount'),
     path('uploadVideo/', views.uploadvideo, name='uploadVideo'),

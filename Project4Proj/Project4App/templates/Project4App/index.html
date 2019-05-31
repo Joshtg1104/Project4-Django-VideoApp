@@ -9,8 +9,11 @@
 <body>
 
 <navbar>
-<section><a href="{% url 'uploadVideo' %}">Vommunicate</a></section>
-<section><a href="{% url 'createAccount' %}">Create Account</a></section>
+<section>
+    <a href="{% url 'uploadVideo' %}">Vommunicate</a>
+    <a href="{% url 'createAccount' %}">Create Account</a>
+    <a href="{% url 'login' %}">Login</a>
+</section>
 </navbar>
 
 {% if allVideos %}
