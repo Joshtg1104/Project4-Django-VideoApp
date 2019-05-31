@@ -1,21 +1,29 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+{% extends 'Project4App/base.html' %}
 
-<body>
+{% block header %}
+{% if user.is_authenticated %}
+What's Up Vommies
+<p>Welcome {{ user.username }}</p>
+{% else %}
+<p>Welcome Visitor</p>
+<p>Log-In or Create an Account</p>
+{% endif %}
+{% endblock header %}
 
-<navbar>
-<section>
-    <a href="{% url 'uploadVideo' %}">Vommunicate</a>
-    <a href="{% url 'createAccount' %}">Create Account</a>
-    <a href="{% url 'login' %}">Login</a>
-</section>
-</navbar>
 
+{% block nav %}
+{% if user.is_authenticated %}
+<a href="{% url 'index' %}">What's Up Vommies</a>
+<a href="{% url 'index' %}">Vommunity</a>
+<a href="{% url 'uploadVideo' %}">Vommunicate</a>
+<a href="{% url 'logout' %}">Log Out</a>
+{% else %}
+<p></p>
+{% endif %}
+{% endblock nav %}
+
+{% block content %}
+{% if user.is_authenticated %}
 {% if allVideos %}
 <ul>
     {% for eachVideo in allVideos %}
@@ -30,6 +38,11 @@
 {% else %}
 <h3>No Vommies Available</h3>
 {% endif %}
+{% else %}
+<a href="{% url 'createAccount' %}">Create Account</a>
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+{% endblock content %}
 
 </body>
 </html>

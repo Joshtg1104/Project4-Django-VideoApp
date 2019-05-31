@@ -2,14 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Passion Project: Vommune</title>
+    <title>Vommune</title>
     {% load static %}
-    {% static 'Project4App/css/bootstrap.css' %}
     <link rel="stylesheet" href="{% static 'Project4App/css/bootstrap.css' %}">
-    <script src="{% static 'Project4App/css/' %}"></script>
-
+    <script src="{% static 'Project4App/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
 </head>
-<body>
-Something here
+<body class="arrange">
+<header>
+    <h2>
+        {% block header %}
+        Rage Against the Base
+        {% endblock header %}
+    </h2>
+</header>
+<nav>
+    {% block nav %}
+    <a href="{% url 'index' %}">What's Up Vommies</a>
+    <a href="{% url 'uploadVideo' %}">Vommunicate</a>
+    <a href="{% url 'index' %}">Vommunity</a>
+    {% endblock nav %}
+</nav>
+<content>
+    {% block content %}
+    This is Where the Videos Go
+    {% endblock content %}
+</content>
+<footer>
+    {% block footer %}
+    <p><strong>Vommune 2019</strong></p>
+    {% endblock footer %}
+</footer>
 </body>
 </html>
