@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .forms import VideoForm, AccountForm
-from .models import Video, AccountModel
+from .forms import VideoForm, AccountForm, CommentForm
+from .models import Video, AccountModel, CommentModel
 
 
 # Create your views here.
@@ -37,58 +37,68 @@ def createaccount(request):
 
 def uploadvideo(request):
     #This works but does not implement foreign key
-    vidform = VideoForm(request.POST or None, request.FILES or None)
-    if request.method == "POST":
-        if vidform.is_valid():
-            vidform.save()
-            return redirect('index')
-    lastvideo = Video.objects.last()
-    vids = lastvideo.videofile
-    context = {
-        'vids': vids,
-        'vidform': vidform
-    }
+    # vidform = VideoForm(request.POST or None, request.FILES or None)
+    # if request.method == "POST":
+    #     if vidform.is_valid():
+    #         vidform.save()
+    #         return redirect('index')
+    # lastvideo = Video.objects.create()
+    # vids = lastvideo.videofile
+    # context = {
+    #     'vids': vids,
+    #     'vidform': vidform
+    # }
 
     # This does not work, stops at validation because form is not valid
-    # vidform = VideoForm(request.POST)
-    # print(vidform)
-    # if request.user.is_authenticated:
-    #     user = AccountModel.objects.get(username=request.user)
-    #     print(user)
-    #
-    # if request.method == "POST":
-    #     print(request.method)
-    #     if vidform.is_valid():
-    #         print(vidform)
-    #         print("Here")
-    #         print(vidform.is_valid())
-    #         Video.objects.create(name=request.POST["name"], videofile=request.POST["videofile"], videoForeignKey=user)
-    #         vidform.save()
-    #
-    #         return redirect('index')
-    #     else:
-    #         print("validation failed")
-    #
-    # # lastvideo = Video.objects.last()
-    # #
-    # # vids = lastvideo.videofile
-    #
-    # context = {
-    #     'vidform': vidform,
-    #     'errors': vidform.errors
-    # }
+    vidform = VideoForm(request.POST)
+    print(vidform)
+    if request.user.is_authenticated:
+        user = AccountModel.objects.get(username=request.user)
+        print(user)
+        print(request.method)
+        print(vidform.is_valid)
+        if vidform.is_valid():
+
+            print("Here")
+            print(vidform.is_valid())
+            Video.objects.create(name=request.POST["name"], videofile=request.FILES["videofile"], videoForeignKey=user)
+            vidform.save()
+
+            return redirect('index')
+        else:
+            print("validation failed")
+
+    context = {
+        'vidform': vidform,
+        'errors': vidform.errors
+    }
 
     return render(request, 'Project4App/uploadVideo.html', context)
 
-# form = VideoForm(request.POST or None, request.FILES or None)
-# if request.method == "POST":
-#     if form.is_valid():
-#         form.save()
-#         return redirect('index')
-# lastvideo = Video.objects.last()
-# vids = lastvideo.videofile
-# context = {
-#     'vids': vids,
-#     'form': form
-# }
-# return render(request, 'Project4App/uploadVideo.html', context)
+
+def videopage(request, id):
+    watchvideo = get_object_or_404(Video, pk=id)
+    videocomments = CommentModel.objects.filter(commentForeignKey=watchvideo)
+    context = {
+        'watchvideo': watchvideo,
+        'videocomments': videocomments,
+    }
+    return render(request, 'Project4App/videoPage.html', context)
+
+
+def commentsection(request, id):
+    commentform = CommentForm(request.POST)
+    if request.user.is_authenticated:
+        watchvideo = get_object_or_404(Video, pk=id)
+        if commentform.is_valid():
+            print(request.POST)
+            CommentModel.objects.create(text=request.POST["text"], commentForeignKey=watchvideo)
+            return redirect('commentSection', id)
+    context = {
+        'comment': commentform,
+        'errors': commentform.errors,
+        'id': id,
+    }
+    return render(request, 'Project4App/videoPage.html', context)
+
+

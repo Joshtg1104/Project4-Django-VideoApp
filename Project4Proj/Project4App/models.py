@@ -17,9 +17,19 @@ class AccountModel(models.Model):
 
 
 class Video(models.Model):
-    name = models.CharField(max_length=500)
+    name = models.CharField(max_length=500, default="")
     videofile = models.FileField(upload_to='videos/', null=True, verbose_name="")
     videoForeignKey = models.ForeignKey(AccountModel, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
+
+
+class CommentModel(models.Model):
+    text = models.CharField(max_length=1000, default="")
+    commentForeignKey = models.ForeignKey(Video, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return self.text
+
+

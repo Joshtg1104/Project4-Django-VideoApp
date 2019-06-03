@@ -1,12 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Video, AccountModel
-
-
-class VideoForm(forms.ModelForm):
-    class Meta:
-        model = Video
-        fields = ["name", "videofile"]
+from .models import Video, AccountModel, CommentModel
 
 
 class AccountForm(forms.ModelForm):
@@ -29,4 +23,17 @@ class AccountForm(forms.ModelForm):
             if User.objects.filter(username=usernameData).exists():
                 raise forms.ValidationError("Username already in use")
             return usernameData
+
+
+class VideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        exclude = ["videoForeignKey"]
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = CommentModel
+        exclude = ["commentForeignKey"]
+
 
