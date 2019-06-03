@@ -28,10 +28,12 @@ What's Up Vommies
 <ul>
     {% for eachVideo in allVideos %}
     <a href="{% url 'videoPage' eachVideo.id %}">{{ eachVideo.name }}</a><br>
-        <img width='300'>
-            <source src='{{ MEDIA_URL }}{{ eachVideo.videofile }}' type='image'>
+    <a href="{% url 'videoPage' eachVideo.id %}">
+        <video width='300'>
+            <source src='{{ MEDIA_URL }}{{ eachVideo.videofile }}' type='video/mp4'>
             Your browser does not support the video tag.
-        </img>
+        </video>
+    </a>
         <br>
     {% endfor %}
 </ul>
