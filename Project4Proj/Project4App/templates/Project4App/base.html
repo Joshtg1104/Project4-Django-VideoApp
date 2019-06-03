@@ -5,6 +5,7 @@
     <title>Vommune</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'Project4App/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Project4App/css/base.css' %}">
     <script src="{% static 'Project4App/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
 </head>
@@ -28,6 +29,11 @@
     This is Where the Videos Go
     {% endblock content %}
 </content>
+<section>
+    {% block section %}
+    Oh Section My Section
+    {% endblock section %}
+</section>
 <footer>
     {% block footer %}
     <p><strong>Vommune 2019</strong></p>

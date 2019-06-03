@@ -13,9 +13,9 @@
 </video>
 {% endblock content %}
 <br>
-
+{% block section %}
 <div>
-<form method="POST" action="">
+<form method="POST" enctype="multipart/form-data" action="">
     {% csrf_token %}
     {{ commentform.as_p }}
     <input type="submit" value="Post">
@@ -24,17 +24,20 @@
 </form>
 </div>
 <br>
-
-<div>
+<hr>
 {% if allComments %}
 {% for eachComment in allComments %}
+<div class="comment">
     <ul>
-    {{ comment.username }}
-    {{ comment.text }}
+        <div>{{ newcomment.created_date }}</div>
+        <strong>{{ newcomment.username }}</strong>
+        <p>{{ newcomment.text|linebreaks }}</p>
     </ul>
+</div>
 {% endfor %}
 
 {% else %}
-No Comments
+<p>No Comments</p>
 {% endif %}
-</div>
+
+{% endblock section %}

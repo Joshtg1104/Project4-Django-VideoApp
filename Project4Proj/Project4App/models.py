@@ -26,10 +26,18 @@ class Video(models.Model):
 
 
 class CommentModel(models.Model):
-    text = models.CharField(max_length=1000, default="")
-    commentForeignKey = models.ForeignKey(Video, on_delete=models.SET_NULL, null=True, blank=True)
+    text = models.TextField(default="")
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+    commentForeignKey = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True, related_name='comments')
+
+    class Meta:
+        ordering = ('created_date',)
+
+    def approved(self):
+        self.approved_comment = True
+        self.save()
 
     def __str__(self):
         return self.text
-
-

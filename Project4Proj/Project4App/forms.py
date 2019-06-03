@@ -34,6 +34,8 @@ class VideoForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = CommentModel
-        exclude = ["commentForeignKey"]
+        fields = ['text']
+        labels = {'vomessage': ''}
+        widgets = {'vomessage': forms.Textarea(attrs={'cols': 10})}
 
 

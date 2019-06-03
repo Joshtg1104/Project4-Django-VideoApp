@@ -37,68 +37,80 @@ def createaccount(request):
 
 def uploadvideo(request):
     #This works but does not implement foreign key
-    # vidform = VideoForm(request.POST or None, request.FILES or None)
-    # if request.method == "POST":
-    #     if vidform.is_valid():
-    #         vidform.save()
-    #         return redirect('index')
-    # lastvideo = Video.objects.create()
-    # vids = lastvideo.videofile
-    # context = {
-    #     'vids': vids,
-    #     'vidform': vidform
-    # }
-
-    # This does not work, stops at validation because form is not valid
-    vidform = VideoForm(request.POST)
-    print(vidform)
-    if request.user.is_authenticated:
-        user = AccountModel.objects.get(username=request.user)
-        print(user)
-        print(request.method)
-        print(vidform.is_valid)
+    vidform = VideoForm(request.POST or None, request.FILES or None)
+    if request.method == "POST":
         if vidform.is_valid():
-
-            print("Here")
-            print(vidform.is_valid())
-            Video.objects.create(name=request.POST["name"], videofile=request.FILES["videofile"], videoForeignKey=user)
             vidform.save()
-
             return redirect('index')
-        else:
-            print("validation failed")
-
+    lastvideo = Video.objects.last()
+    vids = lastvideo.videofile
     context = {
-        'vidform': vidform,
-        'errors': vidform.errors
+        'vids': vids,
+        'vidform': vidform
     }
 
+    # This does not work, stops at validation because form is not valid
+    # vidform = VideoForm(request.POST)
+    # print(vidform)
+    # if request.user.is_authenticated:
+    #     print(request.user)
+    #     print(request.user.is_authenticated)
+    #     user = AccountModel.objects.get(username=request.user)
+    #     print(user)
+    #     print(request.method)
+    #     print(vidform.is_valid)
+    #     if vidform.is_valid():
+    #
+    #         print("Here")
+    #         print(vidform.is_valid())
+    #         Video.objects.create(name=request.POST["name"], videofile=request.FILES["videofile"], videoForeignKey=user)
+    #         vidform.save()
+    #
+    #         return redirect('index')
+    #     else:
+    #         print("validation failed")
+    #
+    # context = {
+    #     'vidform': vidform,
+    #     'errors': vidform.errors
+    # }
+    #
     return render(request, 'Project4App/uploadVideo.html', context)
 
 
 def videopage(request, id):
     watchvideo = get_object_or_404(Video, pk=id)
     videocomments = CommentModel.objects.filter(commentForeignKey=watchvideo)
+    commentform = CommentForm()
     context = {
         'watchvideo': watchvideo,
+        'commentform': commentform,
         'videocomments': videocomments,
     }
     return render(request, 'Project4App/videoPage.html', context)
 
 
 def commentsection(request, id):
-    commentform = CommentForm(request.POST)
-    if request.user.is_authenticated:
-        watchvideo = get_object_or_404(Video, pk=id)
+
+    watchvideo = get_object_or_404(Video, pk=id)
+    print(watchvideo)
+    if request.method == 'POST':
+        commentform = CommentForm(request.POST)
+        print(commentform)
         if commentform.is_valid():
-            print(request.POST)
-            CommentModel.objects.create(text=request.POST["text"], commentForeignKey=watchvideo)
-            return redirect('commentSection', id)
+            comment = commentform.save(commit=False)
+            comment.watchvideo = watchvideo
+            comment.save()
+            return redirect('videoPage', id)
+    else:
+        commentform = CommentForm()
     context = {
         'comment': commentform,
         'errors': commentform.errors,
         'id': id,
     }
-    return render(request, 'Project4App/videoPage.html', context)
+    print(commentform)
+    return render(request, 'Project4App/commentSection', context)
+
 
 
