@@ -36,6 +36,5 @@ class CommentForm(forms.ModelForm):
         model = CommentModel
         fields = ['text']
         labels = {'vomessage': ''}
-        widgets = {'vomessage': forms.Textarea(attrs={'cols': 10})}
 
 

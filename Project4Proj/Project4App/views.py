@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .forms import VideoForm, AccountForm, CommentForm
@@ -38,16 +39,17 @@ def createaccount(request):
 def uploadvideo(request):
     #This works but does not implement foreign key
     vidform = VideoForm(request.POST or None, request.FILES or None)
-    if request.method == "POST":
+    if request.user.is_authenticated:
+        user = AccountModel.objects.get(username=request.user)
         if vidform.is_valid():
-            vidform.save()
+            Video.objects.create(name=request.POST["name"], videofile=request.FILES["videofile"], videoForeignKey=user)
+            # vidform.save()
             return redirect('index')
-    lastvideo = Video.objects.last()
-    vids = lastvideo.videofile
-    context = {
-        'vids': vids,
-        'vidform': vidform
-    }
+        # vids = newvideo.videofile
+        context = {
+            # 'vids': vids,
+            'vidform': vidform,
+        }
 
     # This does not work, stops at validation because form is not valid
     # vidform = VideoForm(request.POST)
@@ -75,42 +77,58 @@ def uploadvideo(request):
     #     'errors': vidform.errors
     # }
     #
-    return render(request, 'Project4App/uploadVideo.html', context)
+        return render(request, 'Project4App/uploadVideo.html', context)
 
 
 def videopage(request, id):
     watchvideo = get_object_or_404(Video, pk=id)
-    videocomments = CommentModel.objects.filter(commentForeignKey=watchvideo)
+    print(watchvideo)
+    # videocomments = CommentModel.objects.filter(commentForeignKey=watchvideo)
     commentform = CommentForm()
+    print(commentform)
+    allComments = CommentModel.objects.filter(commentForeignKey=watchvideo)
+    print(request.method)
+    comment = CommentForm(request.POST)
+    print(comment)
+    if request.method == 'POST':
+        # watchvideo = get_object_or_404(Video, pk=id)
+        print(watchvideo)
+        print(comment.is_valid)
+        if comment.is_valid():
+            print(request.POST)
+            CommentModel.objects.create(text=request.POST["text"], commentForeignKey=watchvideo)
+            return redirect('videoPage', id)
+
     context = {
         'watchvideo': watchvideo,
         'commentform': commentform,
-        'videocomments': videocomments,
+        'comment': comment,
+        'allComments': allComments
     }
     return render(request, 'Project4App/videoPage.html', context)
 
 
-def commentsection(request, id):
-
-    watchvideo = get_object_or_404(Video, pk=id)
-    print(watchvideo)
-    if request.method == 'POST':
-        commentform = CommentForm(request.POST)
-        print(commentform)
-        if commentform.is_valid():
-            comment = commentform.save(commit=False)
-            comment.watchvideo = watchvideo
-            comment.save()
-            return redirect('videoPage', id)
-    else:
-        commentform = CommentForm()
-    context = {
-        'comment': commentform,
-        'errors': commentform.errors,
-        'id': id,
-    }
-    print(commentform)
-    return render(request, 'Project4App/commentSection', context)
+# def commentsection(request, id):
+#
+#     watchvideo = get_object_or_404(Video, pk=id)
+#     print(watchvideo)
+#     if request.method == 'POST':
+#         commentform = CommentForm(request.POST)
+#         print(commentform)
+#         if commentform.is_valid():
+#             comment = commentform.save(commit=False)
+#             comment.watchvideo = watchvideo
+#             comment.save()
+#             return redirect('videoPage', id)
+#     else:
+#         commentform = CommentForm()
+#     context = {
+#         'comment': commentform,
+#         'errors': commentform.errors,
+#         'id': id,
+#     }
+#     print(commentform)
+#     return render(request, 'Project4App/commentSection', context)
 
 
 

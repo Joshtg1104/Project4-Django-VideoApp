@@ -3,10 +3,13 @@
 
 
 {% block header %}
-{{ watchvideo.name }}
+Vommune
 {% endblock header %}
 
 {% block content %}
+<div>
+    <p><h3><strong>{{ watchvideo.name }}</strong></h3></p>
+</div>
 <video width='600' controls autoplay>
     <source src='{{ MEDIA_URL }}{{ watchvideo.videofile }}' type='video/mp4'>
     Your browser does not support the video tag.
@@ -29,9 +32,9 @@
 {% for eachComment in allComments %}
 <div class="comment">
     <ul>
-        <div>{{ newcomment.created_date }}</div>
-        <strong>{{ newcomment.username }}</strong>
-        <p>{{ newcomment.text|linebreaks }}</p>
+        <strong>{{ eachComment.commentForeignKey.videoForeignKey.username }}</strong>
+        <p>{{ eachComment.text }}</p>
+        <p>{{ eachComment.created_date }}</p>
     </ul>
 </div>
 {% endfor %}

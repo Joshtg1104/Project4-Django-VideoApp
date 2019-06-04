@@ -27,7 +27,8 @@ What's Up Vommies
 {% if allVideos %}
 <ul>
     {% for eachVideo in allVideos %}
-    <a href="{% url 'videoPage' eachVideo.id %}">{{ eachVideo.name }}</a><br>
+    <a href="{% url 'videoPage' eachVideo.id %}">{{ eachVideo.name }}</a>
+    <br>
     <a href="{% url 'videoPage' eachVideo.id %}">
         <video width='300'>
             <source src='{{ MEDIA_URL }}{{ eachVideo.videofile }}' type='video/mp4'>
@@ -45,6 +46,10 @@ What's Up Vommies
 <a href="{% url 'login' %}">Login</a>
 {% endif %}
 {% endblock content %}
+
+{% block section %}
+
+{% endblock section %}
 
 </body>
 </html>
