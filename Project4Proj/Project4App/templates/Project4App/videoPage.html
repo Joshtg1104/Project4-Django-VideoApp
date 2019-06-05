@@ -16,6 +16,14 @@
     </h2>
 </header>
 
+<nav>
+    {% block nav %}
+    <a href="{% url 'index' %}">What's Up Vommies</a>
+    <a href="{% url 'uploadVideo' %}">Vommunicate</a>
+    <a href="{% url 'index' %}">Vommunity</a>
+    {% endblock nav %}
+</nav>
+
 <content>
     <div>
         <p><h3><strong>{{ watchvideo.name }}</strong></h3></p>

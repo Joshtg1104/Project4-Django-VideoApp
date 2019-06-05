@@ -2,11 +2,11 @@
 
 {% block header %}
 {% if user.is_authenticated %}
-What's Up Vommies
+Vommune
 <p>Welcome {{ user.username }}</p>
 {% else %}
+Vommune
 <p>Welcome Visitor</p>
-<p>Log-In or Create an Account</p>
 {% endif %}
 {% endblock header %}
 
@@ -42,6 +42,7 @@ What's Up Vommies
 <h3>No Vommies Available</h3>
 {% endif %}
 {% else %}
+<p>Log-In or Create an Account</p>
 <a href="{% url 'createAccount' %}">Create Account</a>
 <a href="{% url 'login' %}">Login</a>
 {% endif %}
