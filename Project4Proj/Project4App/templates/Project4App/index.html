@@ -2,22 +2,22 @@
 
 {% block header %}
 {% if user.is_authenticated %}
-Vommune
-<p>Welcome {{ user.username }}</p>
+<p class="bcolor1 heading">Vommune</p>
 {% else %}
-Vommune
-<p>Welcome Visitor</p>
+<p class="bcolor1 heading">Vommune</p>
 {% endif %}
 {% endblock header %}
 
 
 {% block nav %}
 {% if user.is_authenticated %}
+<p>Welcome {{ user.username }}</p>
 <a href="{% url 'index' %}">What's Up Vommies</a>
 <a href="{% url 'index' %}">Vommunity</a>
 <a href="{% url 'uploadVideo' %}">Vommunicate</a>
 <a href="{% url 'logout' %}">Log Out</a>
 {% else %}
+<p>Welcome Visitor</p>
 <p></p>
 {% endif %}
 {% endblock nav %}
