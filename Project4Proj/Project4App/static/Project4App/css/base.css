@@ -1,6 +1,39 @@
-
-
-
-.comment{
-    margin: 20px 0px 20px 20px;
+/*Establishes grid setup*/
+.arrange {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /*grid-template-rows: repeat(4, 1fr);*/
+    grid-gap: 5px;
 }
+/*Puts all page links on the same line*/
+.lineup {
+    display: inline-block;
+}
+
+/*Assigns header to an area in the grid, changes text color, text alignment, and background color*/
+header {
+
+}
+
+/*Assigns nav to an area in the grid, changes text color, text alignment,establishes border, and background color*/
+nav {
+
+}
+
+/*Assigns content to an area in the grid, removes text decoration, and aligns text*/
+content {
+
+}
+
+
+/*Assigns footer to an area in the grid, sets left margin, and centers text*/
+footer {
+
+}
+
+/*Gives entire boder a red border*/
+body {
+
+}
+
+

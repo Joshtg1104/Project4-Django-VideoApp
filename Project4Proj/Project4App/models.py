@@ -31,6 +31,7 @@ class CommentModel(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
     commentForeignKey = models.ForeignKey(Video, on_delete=models.CASCADE, null=True, blank=True, related_name='comments')
+    commenterForeignKey = models.ForeignKey(AccountModel, on_delete=models.CASCADE, null=True, blank=True, related_name='comments')
 
     class Meta:
         ordering = ('created_date',)

@@ -1,38 +1,51 @@
-{% extends 'Project4App/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vommune</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Project4App/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Project4App/css/videoPage.css' %}">
+    <script src="{% static 'Project4App/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
+</head>
+<body>
+<header>
+    <h2>
+        Vommune
+    </h2>
+</header>
 
+<content>
+    <div>
+        <p><h3><strong>{{ watchvideo.name }}</strong></h3></p>
+    </div>
+    <video width='600' controls autoplay>
+        <source src='{{ MEDIA_URL }}{{ watchvideo.videofile }}' type='video/mp4'>
+        Your browser does not support the video tag.
+    </video>
+    <p><strong>Uploaded by {{ watchvideo.videoForeignKey.username }}</strong></p>
+</content>
 
-
-{% block header %}
-Vommune
-{% endblock header %}
-
-{% block content %}
-<div>
-    <p><h3><strong>{{ watchvideo.name }}</strong></h3></p>
-</div>
-<video width='600' controls autoplay>
-    <source src='{{ MEDIA_URL }}{{ watchvideo.videofile }}' type='video/mp4'>
-    Your browser does not support the video tag.
-</video>
-{% endblock content %}
 <br>
-{% block section %}
-<div>
-<form method="POST" enctype="multipart/form-data" action="">
-    {% csrf_token %}
-    {{ commentform.as_p }}
-    <input type="submit" value="Post">
-    <br>
-    <a href=" ">Cancel</a>
-</form>
-</div>
+
+<section>
+    <div>
+        <form method="POST" enctype="multipart/form-data" action="">
+            {% csrf_token %}
+            {{ commentform.as_p }}
+            <input type="submit" value="Post">
+            <br>
+            <a href=" ">Cancel</a>
+        </form>
+    </div>
 <br>
 <hr>
 {% if allComments %}
 {% for eachComment in allComments %}
 <div class="comment">
     <ul>
-        <strong>{{ eachComment.commentForeignKey.videoForeignKey.username }}</strong>
+        <strong>{{ eachComment.username }}</strong>
         <p>{{ eachComment.text }}</p>
         <p>{{ eachComment.created_date }}</p>
     </ul>
@@ -43,4 +56,11 @@ Vommune
 <p>No Comments</p>
 {% endif %}
 
-{% endblock section %}
+</section>
+
+<footer>
+    <p><strong>Vommune 2019</strong></p>
+</footer>
+
+</body>
+</html>
