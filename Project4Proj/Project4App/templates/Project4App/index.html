@@ -2,22 +2,22 @@
 
 {% block header %}
 {% if user.is_authenticated %}
-<p class="bcolor1 heading">Vommune</p>
+<p class="bcolor1 heading color5">Vommune</p>
 {% else %}
-<p class="bcolor1 heading">Vommune</p>
+<p class="bcolor1 heading color5">Vommune</p>
 {% endif %}
 {% endblock header %}
 
 
 {% block nav %}
 {% if user.is_authenticated %}
-<p>Welcome {{ user.username }}</p>
+<p class="tcolor1 usernameText"><strong>Welcome {{ user.username }}</strong></p>
 <a href="{% url 'index' %}">What's Up Vommies</a>
 <a href="{% url 'index' %}">Vommunity</a>
 <a href="{% url 'uploadVideo' %}">Vommunicate</a>
 <a href="{% url 'logout' %}">Log Out</a>
 {% else %}
-<p>Welcome Visitor</p>
+<p><h3><strong class="color5">Welcome Visitor</strong></h3></p>
 <p></p>
 {% endif %}
 {% endblock nav %}
@@ -42,9 +42,10 @@
 <h3>No Vommies Available</h3>
 {% endif %}
 {% else %}
-<p>Log-In or Create an Account</p>
-<a href="{% url 'createAccount' %}">Create Account</a>
-<a href="{% url 'login' %}">Login</a>
+<p class="indexText color3">Log-In or Create an Account</p>
+<p class="indexText color5"><a href="{% url 'createAccount' %}">Create Account</a></p>
+<p class="indexText color2">or</p>
+<p class="indexText color5"><a href="{% url 'login' %}">Login</a></p>
 {% endif %}
 {% endblock content %}
 
@@ -52,5 +53,3 @@
 
 {% endblock section %}
 
-</body>
-</html>

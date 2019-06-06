@@ -9,7 +9,11 @@
     <script src="{% static 'Project4App/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
 </head>
+{% if user.is_authenticated %}
 <body class="arrange">
+{% else %}
+<body class="arrange loginBackground">
+{% endif %}
 <header class="bcolor3">
     <h2 class="bcolor2">
         {% block header %}
@@ -34,10 +38,18 @@
     Oh Section My Section
     {% endblock section %}
 </section>
-<footer>
+{% if user.is_authenticated %}
+<footer class="color5">
+{% else %}
+<footer class="footerPadding color5">
     {% block footer %}
-    <p><strong>Vommune 2019</strong></p>
+    <p>
+        <strong >Vommune 2019</strong>
+    </p>
     {% endblock footer %}
 </footer>
+</footer>
+{% endif %}
+</body>
 </body>
 </html>
