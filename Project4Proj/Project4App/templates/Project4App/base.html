@@ -10,14 +10,14 @@
     <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
 </head>
 {% if user.is_authenticated %}
-<body class="arrange">
+<body class="arrange bcolor3">
 {% else %}
 <body class="arrange loginBackground">
 {% endif %}
-<header class="bcolor3">
-    <h2 class="bcolor2">
+<header class="bcolor2">
+    <h2 class="bcolor1">
         {% block header %}
-        <p class="bcolor1">Rage Against the Base</p>
+        <p class="bcolor4">Rage Against the Base</p>
         {% endblock header %}
     </h2>
 </header>

@@ -8,19 +8,20 @@
 
 .bcolor1{
     background: #3943B7;
-    width: 69%;
-}
-.bcolor2{
-    background: #F26419;
     width: 79%;
     height: 2%;
 }
+.bcolor2{
+    background: #F26419;
+    width: 23.8%;
+}
 .bcolor3{
     background: #F6AE2D;
-    width: 23.8%;
+
 }
 .bcolor4{
     background: #758E4F;
+    width: 69%;
 }
 .bcolor5{
     background: #86BBD8;
@@ -91,9 +92,19 @@
     font-size: 21pt;
 }
 .usernameText{
-    font-size: 14pt;
+    font-size: 16pt;
     text-decoration: underline;
 }
+.textSize1{
+    font-size: 12pt;
+}
+.textSize2{
+    font-size: 20pt;
+}
+.textSize3{
+    font-size: 25pt;
+}
+
 iframe{
     width: 300px;
     height: 150px;
@@ -108,6 +119,12 @@ body{
     background-color: transparent;
     /*text-align: center;*/
     /*color: #cc0000;*/
+}
+.alignleft{
+    text-align: left;
+}
+.leftmargin{
+    margin-left: 30px;
 }
 
 .lineup {
@@ -124,6 +141,8 @@ header {
 nav {
     grid-column: 1/4;
     grid-row: 2;
+    text-align: center;
+    text-decoration: none;
 }
 
 /*Assigns content to an area in the grid, removes text decoration, and aligns text*/
