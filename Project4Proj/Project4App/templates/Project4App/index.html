@@ -12,12 +12,12 @@
 {% block nav %}
 {% if user.is_authenticated %}
 <p class="alignleft tcolor1 usernameText"><strong>Welcome {{ user.username }}</strong></p>
-<p class="lineup leftmargin textSize3"><a href="{% url 'index' %}">What's Up Vommies</a></p>
-<p class="lineup leftmargin textSize3"><a href="{% url 'index' %}">Vommunity</a></p>
-<p class="lineup leftmargin textSize3"><a href="{% url 'uploadVideo' %}">Vommunicate</a></p>
-<p class="lineup leftmargin textSize3"><a href="{% url 'logout' %}">Log Out</a></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'index' %}">What's Up Vommies</a></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'index' %}">Vommunity</a></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'uploadVideo' %}">Vommunicate</a></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
-<p><h3><strong class="color5">Welcome Visitor</strong></h3></p>
+<p class="aligncenter"><h3><strong class="color5">Welcome Visitor</strong></h3></p>
 <p></p>
 {% endif %}
 {% endblock nav %}
@@ -27,7 +27,7 @@
 {% if allVideos %}
 <ul>
     {% for eachVideo in allVideos %}
-    <a class="textSize2 tcolor2" href="{% url 'videoPage' eachVideo.id %}"><strong>{{ eachVideo.name }}</strong></a>
+    <a class="textSize2 color2" href="{% url 'videoPage' eachVideo.id %}"><strong>{{ eachVideo.name }}</strong></a>
     <br>
     <a href="{% url 'videoPage' eachVideo.id %}">
         <video width='300'>
@@ -42,10 +42,12 @@
 <h3>No Vommies Available</h3>
 {% endif %}
 {% else %}
-<p class="indexText color3">Log-In or Create an Account</p>
-<p class="indexText color5"><a href="{% url 'createAccount' %}">Create Account</a></p>
-<p class="indexText color2">or</p>
-<p class="indexText color5"><a href="{% url 'login' %}">Login</a></p>
+<div class="borderbox">
+    <p class="indexText color3">Log-In or Create an Account</p>
+    <p class="indexText color5"><a href="{% url 'createAccount' %}">Create Account</a></p>
+    <p class="indexText color2">or</p>
+    <p class="indexText color5"><a href="{% url 'login' %}">Login</a></p>
+</div>
 {% endif %}
 {% endblock content %}
 

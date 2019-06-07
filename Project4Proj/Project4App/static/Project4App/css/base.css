@@ -91,6 +91,16 @@
     text-decoration: none;
     font-size: 21pt;
 }
+.createText{
+    text-align: center;
+    text-decoration: none;
+    font-size: 16pt;
+}
+.logText{
+    text-align: left;
+    text-decoration: none;
+    font-size: 16pt;
+}
 .usernameText{
     font-size: 16pt;
     text-decoration: underline;
@@ -115,6 +125,12 @@ iframe{
     background-size: 1600px 750px;
     /*padding: 10px;*/
 }
+.loggedbackground{
+    background: #ffffff url(https://media.giphy.com/media/11fHSR7hmRLbkA/giphy.gif) no-repeat;
+    background-size: cover;
+    /*padding: 10px;*/
+}
+
 body{
     background-color: transparent;
     /*text-align: center;*/
@@ -166,5 +182,13 @@ footer {
     margin-top: 295px;
 }
 
-
+.borderbox{
+    border: solid 3px #3943B7;
+    width: 30%;
+    margin-left: 35%;
+    box-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
 
