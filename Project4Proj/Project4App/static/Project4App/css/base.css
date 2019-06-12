@@ -1,6 +1,194 @@
-
-
-
-.comment{
-    margin: 20px 0px 20px 20px;
+/*Establishes grid setup*/
+.arrange {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /*grid-template-rows: repeat(4, 1fr);*/
+    grid-gap: 5px;
 }
+
+.bcolor1{
+    background: #3943B7;
+    width: 79%;
+    height: 2%;
+}
+.bcolor2{
+    background: #F26419;
+    width: 23.8%;
+}
+.bcolor3{
+    background: #F6AE2D;
+
+}
+.bcolor4{
+    background: #758E4F;
+    width: 69%;
+}
+.bcolor5{
+    background: #86BBD8;
+}
+.color1{
+    color: #3943B7;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+}
+.color2{
+    color: #F26419;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+.color3{
+    color: #F6AE2D;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+.color4{
+    color: #758E4F;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+.color5{
+    color: #86BBD8;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+.tcolor1{
+    color: #3943B7;
+}
+.tcolor2{
+    color: #F26419;
+}
+.tcolor3{
+    color: #F6AE2D;
+}
+.tcolor4{
+    color: #758E4F;
+}
+.tcolor5{
+    color: #86BBD8;
+}
+
+.heading{
+    text-align: center;
+    font-size: 60px;
+}
+.indexText{
+    text-align: center;
+    text-decoration: none;
+    font-size: 21pt;
+}
+.createText{
+    text-align: center;
+    text-decoration: none;
+    font-size: 16pt;
+}
+.logText{
+    text-align: left;
+    text-decoration: none;
+    font-size: 16pt;
+}
+.usernameText{
+    font-size: 16pt;
+    text-decoration: underline;
+}
+.textSize1{
+    font-size: 12pt;
+}
+.textSize2{
+    font-size: 20pt;
+}
+.textSize3{
+    font-size: 25pt;
+}
+
+iframe{
+    width: 300px;
+    height: 150px;
+}
+
+.loginBackground{
+    background: #ffffff url(https://media.giphy.com/media/Fh8b063ZLBe3C/giphy.gif) no-repeat;
+    background-size: 1600px 750px;
+    /*padding: 10px;*/
+}
+.loggedbackground{
+    background: #ffffff url(https://media.giphy.com/media/11fHSR7hmRLbkA/giphy.gif) no-repeat;
+    background-size: cover;
+    /*padding: 10px;*/
+}
+
+body{
+    background-color: transparent;
+    /*text-align: center;*/
+    /*color: #cc0000;*/
+}
+.alignleft{
+    text-align: left;
+}
+.leftmargin{
+    margin-left: 30px;
+}
+
+.lineup {
+    display: inline-block;
+}
+
+/*Assigns header to an area in the grid, changes text color, text alignment, and background color*/
+header {
+    grid-column: 1/4;
+    grid-row: 1;
+}
+
+/*Assigns nav to an area in the grid, changes text color, text alignment,establishes border, and background color*/
+nav {
+    grid-column: 1/4;
+    grid-row: 2;
+    text-align: center;
+    text-decoration: none;
+}
+
+/*Assigns content to an area in the grid, removes text decoration, and aligns text*/
+content {
+    grid-column: 1/4;
+    grid-row: 3;
+}
+
+section {
+    grid-column: 1/4;
+    grid-row: 4;
+}
+
+
+/*Assigns footer to an area in the grid, sets left margin, and centers text*/
+footer {
+    grid-column: 1/4;
+    grid-row: 5;
+}
+.footerPadding{
+    margin-top: 295px;
+}
+
+.borderbox{
+    border: solid 3px #3943B7;
+    width: 30%;
+    margin-left: 35%;
+    box-shadow: -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+

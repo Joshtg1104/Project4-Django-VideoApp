@@ -9,19 +9,23 @@
     <script src="{% static 'Project4App/js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
 </head>
-<body class="arrange">
-<header>
-    <h2>
+{% if user.is_authenticated %}
+<body class="arrange loggedbackground">
+{% else %}
+<body class="arrange loginBackground">
+{% endif %}
+<header class="bcolor2">
+    <h2 class="bcolor1">
         {% block header %}
-        Rage Against the Base
+        <p class="bcolor4">Rage Against the Base</p>
         {% endblock header %}
     </h2>
 </header>
 <nav>
     {% block nav %}
-    <a href="{% url 'index' %}">What's Up Vommies</a>
-    <a href="{% url 'uploadVideo' %}">Vommunicate</a>
     <a href="{% url 'index' %}">Vommunity</a>
+    <a href="{% url 'uploadVideo' %}">Vommie Uploader</a>
+    <!--    <a href="{% url 'index' %}">What's Up Vommies</a>-->
     {% endblock nav %}
 </nav>
 <content>
@@ -34,10 +38,18 @@
     Oh Section My Section
     {% endblock section %}
 </section>
-<footer>
-    {% block footer %}
-    <p><strong>Vommune 2019</strong></p>
-    {% endblock footer %}
+{% if user.is_authenticated %}
+<footer class="color5">
+    {% else %}
+    <footer class="footerPadding color5">
+        {% block footer %}
+        <p>
+            <strong>Vommune 2019</strong>
+        </p>
+        {% endblock footer %}
+    </footer>
 </footer>
+{% endif %}
+</body>
 </body>
 </html>

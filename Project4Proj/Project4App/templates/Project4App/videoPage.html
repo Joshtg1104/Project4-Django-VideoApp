@@ -1,46 +1,75 @@
-{% extends 'Project4App/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vommie Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Project4App/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'Project4App/css/videoPage.css' %}">
+    <script src="{% static 'Project4App/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'Project4App/js/bootstrap.js' %}"></script>
+</head>
 
+<body class="arrange bcolor3">
+    <header class="bcolor2">
+        <h2 class="bcolor1">
+            <p class="bcolor4 color3 heading">Vommune</p>
+        </h2>
+    </header>
 
+    <nav>
+        {% block nav %}
+        <a href="{% url 'index' %}">Vommunity</a>
+        <a href="{% url 'uploadVideo' %}">Vommie Uploader</a>
+<!--        <a href="{% url 'index' %}">What's Up Vommies</a>-->
+        {% endblock nav %}
+    </nav>
 
-{% block header %}
-Vommune
-{% endblock header %}
+    <content>
+        <div>
+            <p><h3><strong class="color2">{{ watchvideo.name }}</strong></h3></p>
+        </div>
+        <video width='600' controls autoplay>
+            <source src='{{ MEDIA_URL }}{{ watchvideo.videofile }}' type='video/mp4'>
+            Your browser does not support the video tag.
+        </video>
+        <p><strong class="color2">Uploaded by {{ watchvideo.videoForeignKey.username }}</strong></p>
+    </content>
 
-{% block content %}
-<div>
-    <p><h3><strong>{{ watchvideo.name }}</strong></h3></p>
-</div>
-<video width='600' controls autoplay>
-    <source src='{{ MEDIA_URL }}{{ watchvideo.videofile }}' type='video/mp4'>
-    Your browser does not support the video tag.
-</video>
-{% endblock content %}
-<br>
-{% block section %}
-<div>
-<form method="POST" enctype="multipart/form-data" action="">
-    {% csrf_token %}
-    {{ commentform.as_p }}
-    <input type="submit" value="Post">
     <br>
-    <a href=" ">Cancel</a>
-</form>
-</div>
-<br>
-<hr>
-{% if allComments %}
-{% for eachComment in allComments %}
-<div class="comment">
-    <ul>
-        <strong>{{ eachComment.commentForeignKey.videoForeignKey.username }}</strong>
-        <p>{{ eachComment.text }}</p>
-        <p>{{ eachComment.created_date }}</p>
-    </ul>
-</div>
-{% endfor %}
 
-{% else %}
-<p>No Comments</p>
-{% endif %}
+    <section>
+        <div>
+            <form method="POST" enctype="multipart/form-data" action="">
+                {% csrf_token %}
+                {{ commentform.as_p }}
+                <input type="submit" value="Post">
+                <br>
+                <a href=" ">Cancel</a>
+            </form>
+        </div>
+    <br>
+    <hr>
+    {% if allComments %}
+    {% for eachComment in allComments %}
+    <div class="comment">
+        <ul>
+            <strong class="color1 textSize1">{{ eachComment.username }}</strong>
+            <p class="color5 textSize1">{{ eachComment.text }}</p>
+            <p class="color4 textSize1">{{ eachComment.created_date }}</p>
+        </ul>
+    </div>
+    {% endfor %}
 
-{% endblock section %}
+    {% else %}
+    <p class="color5">No Comments</p>
+    {% endif %}
+
+    </section>
+
+    <footer>
+        <p><strong class="color5">Vommune 2019</strong></p>
+    </footer>
+
+</body>
+</html>

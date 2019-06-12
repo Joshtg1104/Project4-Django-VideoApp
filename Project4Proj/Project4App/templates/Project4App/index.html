@@ -2,22 +2,22 @@
 
 {% block header %}
 {% if user.is_authenticated %}
-What's Up Vommies
-<p>Welcome {{ user.username }}</p>
+<p class="bcolor4 heading color5">Vommune</p>
 {% else %}
-<p>Welcome Visitor</p>
-<p>Log-In or Create an Account</p>
+<p class="bcolor4 heading color5">Vommune</p>
 {% endif %}
 {% endblock header %}
 
 
 {% block nav %}
 {% if user.is_authenticated %}
-<a href="{% url 'index' %}">What's Up Vommies</a>
-<a href="{% url 'index' %}">Vommunity</a>
-<a href="{% url 'uploadVideo' %}">Vommunicate</a>
-<a href="{% url 'logout' %}">Log Out</a>
+<p class="alignleft tcolor1 usernameText"><strong>Welcome {{ user.username }}</strong></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'index' %}">Vommunity</a></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'uploadVideo' %}">Vommie Uploader</a></p>
+<p class="lineup leftmargin textSize3 color5"><a href="{% url 'logout' %}">Log Out</a></p>
+<!--<p class="lineup leftmargin textSize3 color5"><a href="{% url 'index' %}">What's Up Vommies</a></p>-->
 {% else %}
+<p class="aligncenter"><h3><strong class="color5">Welcome Visitor</strong></h3></p>
 <p></p>
 {% endif %}
 {% endblock nav %}
@@ -27,7 +27,7 @@ What's Up Vommies
 {% if allVideos %}
 <ul>
     {% for eachVideo in allVideos %}
-    <a href="{% url 'videoPage' eachVideo.id %}">{{ eachVideo.name }}</a>
+    <a class="textSize2 color2" href="{% url 'videoPage' eachVideo.id %}"><strong>{{ eachVideo.name }}</strong></a>
     <br>
     <a href="{% url 'videoPage' eachVideo.id %}">
         <video width='300'>
@@ -42,8 +42,12 @@ What's Up Vommies
 <h3>No Vommies Available</h3>
 {% endif %}
 {% else %}
-<a href="{% url 'createAccount' %}">Create Account</a>
-<a href="{% url 'login' %}">Login</a>
+<div class="borderbox">
+    <p class="indexText color3">Log-In or Create an Account</p>
+    <p class="indexText color5"><a href="{% url 'createAccount' %}">Create Account</a></p>
+    <p class="indexText color2">or</p>
+    <p class="indexText color5"><a href="{% url 'login' %}">Login</a></p>
+</div>
 {% endif %}
 {% endblock content %}
 
@@ -51,5 +55,3 @@ What's Up Vommies
 
 {% endblock section %}
 
-</body>
-</html>
