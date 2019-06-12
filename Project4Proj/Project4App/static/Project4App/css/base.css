@@ -103,7 +103,7 @@
 }
 .usernameText{
     font-size: 16pt;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 .textSize1{
     font-size: 12pt;
